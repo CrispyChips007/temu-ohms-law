@@ -43,9 +43,12 @@ function buildWheel() {
     const label = document.createElement("span");
     label.className = "segment-label";
     label.textContent = formula;
-    label.style.transform = `rotate(${i * step + step / 2}deg) translateX(7%)`;
     const angle = i * step + step / 2;
-    if (angle > 90 && angle < 270) label.style.transform += " rotate(180deg)";
+    const radians = angle * Math.PI / 180;
+    label.style.left = `${50 + Math.sin(radians) * 34}%`;
+    label.style.top = `${50 - Math.cos(radians) * 34}%`;
+    const readableAngle = angle > 90 && angle < 270 ? angle + 180 : angle;
+    label.style.transform = `translate(-50%, -50%) rotate(${readableAngle}deg)`;
     wheel.appendChild(label);
   });
 }

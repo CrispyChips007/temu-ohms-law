@@ -1,4 +1,4 @@
-# OHM-G! Spin & Win
+# VEMU: Spin & Win
 
 A portrait-first Ohm's Law formula game wrapped in an over-the-top bargain-shopping parody.
 
