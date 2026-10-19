@@ -109,7 +109,7 @@ function beep(freq = 440, duration = .06) {
   osc.stop(ctx.currentTime + duration);
 }
 
-function spin() {
+function spin(swipeVelocity = 0) {
   if (spinning || spinCount >= 3) return;
   spinning = true; spinButton.disabled = true; keepButton.disabled = true;
   const formula = outcomes[spinCount];
@@ -119,11 +119,15 @@ function spin() {
   const normalized = ((rotation % 360) + 360) % 360;
   const targetNorm = ((target % 360) + 360) % 360;
   const delta = (targetNorm - normalized + 360) % 360;
-  rotation += 1440 + delta;
-  wheel.style.transition = "transform 3.65s cubic-bezier(.12,.7,.08,1)";
+  const force = Math.min(1, Math.max(0, (swipeVelocity - .12) / .75));
+  const fullTurns = 4 + Math.round(force * 3);
+  const spinDuration = 3650 + Math.round(force * 1350);
+  rotation += fullTurns * 360 + delta;
+  wheel.style.transition = `transform ${spinDuration}ms cubic-bezier(.12,.7,.08,1)`;
   wheel.style.transform = `rotate(${rotation}deg)`;
   let ticks = 0;
-  const ticker = setInterval(() => { if (ticks++ < 25) beep(260 + ticks * 8, .035); else clearInterval(ticker); }, 105);
+  const maxTicks = Math.floor(spinDuration / 115);
+  const ticker = setInterval(() => { if (ticks++ < maxTicks) beep(260 + ticks * 6, .035); else clearInterval(ticker); }, 105);
   setTimeout(() => {
     clearInterval(ticker); beep(740, .18);
     spinCount++;
@@ -132,7 +136,7 @@ function spin() {
     spinning = false; keepButton.disabled = false;
     renderAttempts(); renderSpinButton();
     if (spinCount < 3) spinButton.disabled = false;
-  }, 3700);
+  }, spinDuration + 50);
 }
 
 function pointerAngle(event) {
@@ -149,7 +153,8 @@ wheelStage.addEventListener("pointerdown", event => {
     lastX: event.clientX,
     lastY: event.clientY,
     distance: 0,
-    angleTravel: 0
+    angleTravel: 0,
+    startedAt: performance.now()
   };
   wheelStage.setPointerCapture(event.pointerId);
   wheelStage.classList.add("dragging");
@@ -178,6 +183,7 @@ wheelStage.addEventListener("pointermove", event => {
 function finishDrag(event, cancelled = false) {
   if (!drag || drag.id !== event.pointerId) return;
   const shouldSpin = !cancelled && drag.distance >= 60 && drag.angleTravel >= 30;
+  const swipeVelocity = drag.angleTravel / Math.max(performance.now() - drag.startedAt, 1);
   wheelStage.classList.remove("dragging");
   if (wheelStage.hasPointerCapture(event.pointerId)) wheelStage.releasePointerCapture(event.pointerId);
   if (!shouldSpin) {
@@ -187,7 +193,7 @@ function finishDrag(event, cancelled = false) {
     spinButton.disabled = spinCount >= 3;
   }
   drag = null;
-  if (shouldSpin) spin();
+  if (shouldSpin) spin(swipeVelocity);
 }
 
 wheelStage.addEventListener("pointerup", event => finishDrag(event));
@@ -223,7 +229,7 @@ function makeConfetti() {
   }
 }
 
-spinButton.addEventListener("click", spin);
+spinButton.addEventListener("click", () => spin());
 keepButton.addEventListener("click", showOutcome);
 document.querySelector("#playAgainButton").addEventListener("click", () => { document.querySelector("#outcomeModal").classList.add("hidden"); newRound(); });
 document.querySelector("#helpButton").addEventListener("click", () => document.querySelector("#helpModal").classList.remove("hidden"));
