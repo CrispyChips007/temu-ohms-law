@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ff4d00" />
+    <meta name="description" content="A ridiculous Ohm's Law spin-to-win parody game." />
+    <title>OHM-G! Spin &amp; Win</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700;900&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <button class="icon-button" id="soundButton" type="button" aria-label="Toggle sound">♪</button>
+        <div class="brand" aria-label="OHM-G">
+          <span class="brand-bolt">ϟ</span>
+          <span>OHM-G!</span>
+        </div>
+        <button class="icon-button" id="helpButton" type="button" aria-label="How to play">?</button>
+      </header>
+
+      <main>
+        <section class="promo-strip" aria-label="Limited-time promotion">
+          <span class="live-dot"></span>
+          <strong>EXCLUSIVE CIRCUIT DEAL</strong>
+          <span>ENDS IN <b id="countdown">04:59</b></span>
+        </section>
+
+        <section class="game-card">
+          <div class="eyebrow"><span>★ 4.9</span> (12,847 definitely real reviews)</div>
+          <h1>SPIN TO SOLVE.<br /><em>KEEP TO WIN.</em></h1>
+          <p class="subhead">One correct formula is hiding in your 3 spins.</p>
+
+          <div class="question-card">
+            <span class="question-tag" id="questionTag">FIND VOLTAGE</span>
+            <p id="questionText">A circuit has 3 A of current and 4 Ω of resistance. What formula finds the voltage?</p>
+          </div>
+
+          <div class="attempts" id="attempts" aria-label="Three available spins"></div>
+
+          <div class="wheel-stage">
+            <div class="pointer" aria-hidden="true"><span></span></div>
+            <div class="wheel-shadow"></div>
+            <div class="wheel" id="wheel" aria-label="Formula prize wheel"></div>
+            <div class="wheel-hub"><span>SPIN</span><small>TO WIN</small></div>
+            <span class="spark spark-a">✦</span><span class="spark spark-b">✦</span>
+          </div>
+
+          <div class="result-chip" id="resultChip" aria-live="polite">
+            <span>YOUR FORMULA</span>
+            <strong id="selectedFormula">Spin the wheel!</strong>
+          </div>
+
+          <div class="actions">
+            <button class="primary-button" id="spinButton" type="button"><span>SPIN 1 OF 3</span><small>Correct answer guaranteed!*</small></button>
+            <button class="keep-button" id="keepButton" type="button" disabled>KEEP THIS FORMULA</button>
+          </div>
+          <p class="fine-print">*Guaranteed to appear. Not guaranteed you won't panic and spin past it.</p>
+        </section>
+
+        <section class="trust-row" aria-label="Parody store promises">
+          <div><span>⚡</span><b>Fast-ish</b><small>delivery</small></div>
+          <div><span>↺</span><b>90-second</b><small>returns*</small></div>
+          <div><span>♢</span><b>Questionable</b><small>quality</small></div>
+        </section>
+      </main>
+
+      <footer>This is an educational parody. Not affiliated with Temu. Please do not wire a house based on a prize wheel.</footer>
+    </div>
+
+    <div class="modal hidden" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+      <div class="modal-card info-card">
+        <button class="modal-close" data-close="helpModal" aria-label="Close">×</button>
+        <span class="modal-kicker">HOW TO PLAY</span>
+        <h2 id="helpTitle">Know it. Spin it. Risk it.</h2>
+        <ol>
+          <li>Read the circuit question.</li>
+          <li>Spin up to three times. One result will be correct.</li>
+          <li>Keep a formula when you think it solves the question—or spin again and lose it forever.</li>
+        </ol>
+        <p>All formulas use <b>V</b> for voltage. No sneaky E for EMF here.</p>
+        <button class="primary-button compact" data-close="helpModal">I'M READY</button>
+      </div>
+    </div>
+
+    <div class="modal hidden" id="outcomeModal" role="dialog" aria-modal="true" aria-labelledby="outcomeTitle">
+      <div class="confetti" id="confetti"></div>
+      <div class="modal-card prize-card">
+        <span class="modal-kicker" id="outcomeKicker">CONGRATULATIONS???</span>
+        <div class="prize-visual" id="prizeVisual" aria-hidden="true">📟</div>
+        <h2 id="outcomeTitle">You won a multimeter!</h2>
+        <p class="price-line"><del id="oldPrice">$89.99</del> <strong id="newPrice">$0.00</strong></p>
+        <p class="prize-copy" id="prizeCopy">Only $450 delivery. Batteries, probes, display and electrical accuracy sold separately.</p>
+        <div class="delivery-line"><span>🚚</span><b id="deliveryText">Arrives sometime between Tuesday and 2029</b></div>
+        <button class="primary-button" id="playAgainButton">CLAIM &amp; PLAY AGAIN</button>
+        <p class="fine-print">Claiming is imaginary. The bragging rights are legally yours.</p>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
