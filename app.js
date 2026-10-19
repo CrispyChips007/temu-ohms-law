@@ -55,7 +55,14 @@ function buildWheel() {
   });
 }
 
-function shuffle(items) { return [...items].sort(() => Math.random() - .5); }
+function shuffle(items) {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 function newRound() {
   question = questions[Math.floor(Math.random() * questions.length)];
   const wrong = shuffle(formulas.filter(f => f !== question.correct)).slice(0, 2);
@@ -189,14 +196,16 @@ wheelStage.addEventListener("pointercancel", event => finishDrag(event, true));
 function showOutcome() {
   const won = selectedFormula.textContent === question.correct;
   const prize = prizes[Math.floor(Math.random() * prizes.length)];
-  document.querySelector("#outcomeKicker").textContent = won ? "CONGRATULATIONS???" : "OHM-NO! DEAL EXPIRED";
-  document.querySelector("#outcomeTitle").textContent = won ? prize.title : "That formula tripped the breaker.";
-  document.querySelector("#prizeVisual").textContent = won ? prize.icon : "💥";
-  document.querySelector("#oldPrice").textContent = won ? prize.old : "$0.00";
-  document.querySelector("#newPrice").textContent = won ? prize.price : "$999.99";
-  document.querySelector("#prizeCopy").textContent = won ? prize.copy : `You kept ${selectedFormula.textContent}, but needed ${question.correct}. Your consolation prize is one premium electron (delivery not available).`;
-  document.querySelector("#deliveryText").textContent = won ? prize.delivery : "Better luck is currently clearing customs";
-  document.querySelector("#playAgainButton").textContent = won ? "CLAIM & PLAY AGAIN" : "TRY ANOTHER DEAL";
+  const prizeCard = document.querySelector(".prize-card");
+  prizeCard.classList.toggle("failure", !won);
+  document.querySelector("#outcomeKicker").textContent = won ? "VEMU DODGY DEAL UNLOCKED" : "FORMULA REJECTED";
+  document.querySelector("#outcomeTitle").textContent = won ? prize.title : "Wrong answer. No bargain for you.";
+  document.querySelector("#prizeVisual").textContent = won ? prize.icon : "⛔";
+  document.querySelector("#oldPrice").textContent = won ? prize.old : "";
+  document.querySelector("#newPrice").textContent = won ? prize.price : "NO DEAL";
+  document.querySelector("#prizeCopy").textContent = won ? prize.copy : `You kept ${selectedFormula.textContent}. The circuit needed ${question.correct}. Your suspiciously cheap prize has been repossessed.`;
+  document.querySelector("#deliveryText").textContent = won ? prize.delivery : "Correct formula required — no substitutions";
+  document.querySelector("#playAgainButton").textContent = won ? "CLAIM DODGY DEAL & PLAY AGAIN" : "TRY ANOTHER FORMULA";
   document.querySelector("#outcomeModal").classList.remove("hidden");
   if (won) makeConfetti();
   beep(won ? 880 : 160, .35);

@@ -73,9 +73,10 @@ h1 em { color: var(--orange); font-style: normal; }
 .wheel-hub { z-index: 4; position: absolute; width: 28%; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 5px solid #fff; border-radius: 50%; color: #fff; background: linear-gradient(#ff6a18,#e93600); box-shadow: 0 4px 10px rgba(75,21,0,.38); font-weight: 900; line-height: .9; }
 .wheel-hub span { font-size: clamp(16px, 5vw, 23px); }
 .wheel-hub small { font-size: 7px; letter-spacing: 1px; }
-.pointer { z-index: 7; position: absolute; top: 0; left: 50%; width: 38px; height: 47px; transform: translateX(-50%); filter: drop-shadow(0 3px 2px rgba(74,20,0,.35)); }
-.pointer::before { content: ""; position: absolute; left: 4px; width: 30px; height: 30px; border: 4px solid #fff; border-radius: 50%; background: #f02e00; }
-.pointer span { position: absolute; top: 23px; left: 10px; width: 0; height: 0; border-left: 9px solid transparent; border-right: 9px solid transparent; border-top: 19px solid #f02e00; }
+.pointer { z-index: 7; position: absolute; top: 0; left: 50%; width: 30px; height: 58px; transform: translateX(-50%); filter: drop-shadow(0 3px 3px rgba(74,20,0,.5)); }
+.pointer::before { content: ""; position: absolute; left: 2px; width: 26px; height: 26px; border: 4px solid #fff; border-radius: 50%; background: #f02e00; }
+.pointer span { position: absolute; top: 22px; left: 5px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 31px solid #fff; }
+.pointer span::after { content: ""; position: absolute; top: -31px; left: -7px; width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 24px solid #f02e00; }
 .spark { position: absolute; color: var(--yellow); font-size: 25px; animation: twinkle 1.2s alternate infinite; }
 .spark-a { left: -4px; top: 22%; }.spark-b { right: -5px; bottom: 16%; animation-delay: .5s; }
 .wheel-gesture-hint { margin: -2px 0 7px; color: #a44a25; font-size: 9px; font-weight: 900; letter-spacing: .55px; }
@@ -103,6 +104,14 @@ footer { padding: 15px 26px 22px; color: #9b8477; background: #fff; font-size: 8
 .modal.hidden { display: none; }
 .modal-card { position: relative; width: min(100%, 410px); padding: 28px 22px 22px; border-radius: 24px; background: #fff9f1; text-align: center; box-shadow: 0 24px 80px rgba(0,0,0,.4); animation: pop .35s both; }
 .modal-card::before { content: ""; position: absolute; inset: 7px; border: 2px dashed #ffc39e; border-radius: 18px; pointer-events: none; }
+.prize-card.failure { color: #421414; background: #ebe8e4; animation: reject .38s both; }
+.prize-card.failure::before { border-color: #8e7870; }
+.prize-card.failure .modal-kicker { background: #801d18; }
+.prize-card.failure .prize-visual { border-color: #aa8f88; background: #d8d1cc; filter: grayscale(1); transform: rotate(4deg); }
+.prize-card.failure .price-line del { display: none; }
+.prize-card.failure .price-line strong { display: inline-block; margin: 8px 0 2px; color: #801d18; font-size: 42px; letter-spacing: -2px; transform: rotate(-3deg); }
+.prize-card.failure .delivery-line { color: #fff; background: #4c3d38; }
+.prize-card.failure .primary-button { background: linear-gradient(#70645f, #443a36); box-shadow: 0 5px 0 #241d1a; }
 .modal-close { z-index: 2; position: absolute; right: 13px; top: 11px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: #ffe2cf; color: #9a3211; font-size: 22px; cursor: pointer; }
 .modal-kicker { position: relative; display: inline-block; padding: 5px 10px; border-radius: 6px; color: #fff; background: var(--orange); font-size: 9px; font-weight: 900; letter-spacing: 1px; }
 .modal h2 { position: relative; margin: 12px 0 8px; font-family: "Space Grotesk", sans-serif; font-size: 29px; line-height: 1; letter-spacing: -1.5px; }
@@ -117,6 +126,7 @@ footer { padding: 15px 26px 22px; color: #9b8477; background: #fff; font-size: 8
 @keyframes pulse { 50% { transform: scale(.65); opacity: .5; } }
 @keyframes twinkle { to { transform: scale(1.5) rotate(25deg); opacity: .4; } }
 @keyframes pop { from { transform: scale(.76) rotate(-2deg); opacity: 0; } }
+@keyframes reject { 0% { transform: scale(.8); opacity: 0; } 35% { transform: translateX(-9px) rotate(-2deg); } 65% { transform: translateX(9px) rotate(2deg); } 100% { transform: translateX(0); opacity: 1; } }
 @keyframes fall { to { transform: translateY(110vh) rotate(700deg); } }
 @media (min-width: 760px) {
   body { padding: 24px; }
