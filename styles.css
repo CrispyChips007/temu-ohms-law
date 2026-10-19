@@ -73,10 +73,9 @@ h1 em { color: var(--orange); font-style: normal; }
 .wheel-hub { z-index: 4; position: absolute; width: 28%; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 5px solid #fff; border-radius: 50%; color: #fff; background: linear-gradient(#ff6a18,#e93600); box-shadow: 0 4px 10px rgba(75,21,0,.38); font-weight: 900; line-height: .9; }
 .wheel-hub span { font-size: clamp(16px, 5vw, 23px); }
 .wheel-hub small { font-size: 7px; letter-spacing: 1px; }
-.pointer { z-index: 7; position: absolute; top: 0; left: 50%; width: 30px; height: 58px; transform: translateX(-50%); filter: drop-shadow(0 3px 3px rgba(74,20,0,.5)); }
-.pointer::before { content: ""; position: absolute; left: 2px; width: 26px; height: 26px; border: 4px solid #fff; border-radius: 50%; background: #f02e00; }
-.pointer span { position: absolute; top: 22px; left: 5px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 31px solid #fff; }
-.pointer span::after { content: ""; position: absolute; top: -31px; left: -7px; width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 24px solid #f02e00; }
+.pointer { z-index: 7; position: absolute; top: -5px; left: 50%; width: 26px; height: 38px; transform: translateX(-50%); filter: drop-shadow(0 3px 3px rgba(74,20,0,.5)); }
+.pointer span { position: absolute; top: 0; left: 3px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 30px solid #fff; }
+.pointer span::after { content: ""; position: absolute; top: -29px; left: -7px; width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 23px solid #f02e00; }
 .spark { position: absolute; color: var(--yellow); font-size: 25px; animation: twinkle 1.2s alternate infinite; }
 .spark-a { left: -4px; top: 22%; }.spark-b { right: -5px; bottom: 16%; animation-delay: .5s; }
 .wheel-gesture-hint { margin: -2px 0 7px; color: #a44a25; font-size: 9px; font-weight: 900; letter-spacing: .55px; }
