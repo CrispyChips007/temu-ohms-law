@@ -16,13 +16,15 @@ const questions = [
 ];
 
 const prizes = [
-  { icon: "📟", title: "You won a multimeter!", old: "$89.99", price: "$0.00", copy: "Only $450 delivery. Batteries, probes, display and electrical accuracy sold separately.", delivery: "Arrives sometime between Tuesday and 2029" },
-  { icon: "🔬", title: "Pocket oscilloscope!", old: "$249.00", price: "$1.17", copy: "Actual size: one quarter. Waveform shown in listing may be a sticker.", delivery: "Only 37 left in 84,000 carts" },
-  { icon: "🔌", title: "1,000-piece resistor kit!", old: "$72.40", price: "$0.03", copy: "Contains 999 pieces of lint and one resistor of absolutely mysterious value.", delivery: "Express shipping: 6–48 business months" },
-  { icon: "🧤", title: "Electrician safety gloves!", old: "$119.95", price: "$0.00", copy: "Stylish, conductive and labelled ‘probably insulated’. One glove included.", delivery: "Free pickup from an undisclosed warehouse" },
-  { icon: "🔋", title: "Infinite power bank!", old: "$599.00", price: "$2.08", copy: "Capacity: 900,000,000 mAh*. *Printed on case in very confident font.", delivery: "Your local courier has entered the chat" },
-  { icon: "💡", title: "Smart light bulb!", old: "$44.95", price: "$0.01", copy: "So smart it refuses to connect to your Wi-Fi on ethical grounds.", delivery: "Almost sold out since 2017" },
-  { icon: "🪛", title: "Luxury 82-in-1 toolkit!", old: "$160.00", price: "$0.79", copy: "Includes one handle and 81 thrilling photographs of screwdriver bits.", delivery: "Carbon-neutral delivery by carrier pigeon" }
+  { icon: "📟", title: "You won a multimeter!", old: "$189.99", price: "$0.00", copy: "CAT ratings include Kitten, Tabby and Lion. Probes, display and electrical accuracy sold separately.", delivery: "$450 delivery • arrives sometime before 2029" },
+  { icon: "🪛", title: "12-piece insulated screwdriver set!", old: "$149.00", price: "$0.07", copy: "Laboratory tested and certified safe for voltages up to an impressive 0 V.", delivery: "Only 3,904 sets left — almost gone!" },
+  { icon: "🥫", title: "Premium can of smoke!", old: "$79.95", price: "$0.01", copy: "Factory-original replacement smoke for electronics. Simply pour it back in after a component blows.", delivery: "Smoke may escape package during transit" },
+  { icon: "🪣", title: "Trade-size bucket of volts!", old: "$119.95", price: "$0.00", copy: "Contains 240 genuine Australian volts. Keep upright to prevent dangerous voltage drop.", delivery: "Free pickup from an undisclosed substation" },
+  { icon: "↔️", title: "Heavy-duty wire stretcher!", old: "$229.00", price: "$1.08", copy: "Adds up to 3 metres whenever the apprentice cuts the cable 50 mm too short.", delivery: "Your local courier has pulled it too tight" },
+  { icon: "💪", title: "Industrial elbow grease!", old: "$399.00", price: "$0.53", copy: "One 10 mL tin. Specially formulated for stiff conduit and first-year apprentices.", delivery: "Danger: may cause sudden productivity" },
+  { icon: "🪛", title: "Left-handed screwdriver!", old: "$160.00", price: "$0.79", copy: "Ergonomically useless for lefties, righties and anyone attempting to turn a screw.", delivery: "Also available in metric Phillips" },
+  { icon: "〰️", title: "Cordless electrical cable!", old: "$999.00", price: "$2.49", copy: "100% wireless wire. Zero copper, zero insulation, zero awkward reels to carry.", delivery: "Already delivered — you just can't see it" },
+  { icon: "✨", title: "Bucket of grinder sparks!", old: "$84.00", price: "$0.04", copy: "Pre-owned sparks, hand collected on site. Recharge in direct fluorescent light.", delivery: "Flammable delivery surcharge: $612" }
 ];
 
 const wheel = document.querySelector("#wheel");
