@@ -28,12 +28,14 @@ const prizes = [
 ];
 
 const wheel = document.querySelector("#wheel");
+const wheelStage = document.querySelector("#wheelStage");
 const spinButton = document.querySelector("#spinButton");
 const keepButton = document.querySelector("#keepButton");
 const selectedFormula = document.querySelector("#selectedFormula");
 const resultChip = document.querySelector("#resultChip");
 const attemptsEl = document.querySelector("#attempts");
 let question, outcomes, spinCount = 0, rotation = 0, spinning = false, soundOn = true;
+let drag = null;
 
 function buildWheel() {
   const colors = ["#f04a00", "#ffb300", "#2f80ed", "#7c4dff", "#12a66a", "#f06292"];
@@ -47,8 +49,10 @@ function buildWheel() {
     const radians = angle * Math.PI / 180;
     label.style.left = `${50 + Math.sin(radians) * 34}%`;
     label.style.top = `${50 - Math.cos(radians) * 34}%`;
-    const readableAngle = angle > 90 && angle < 270 ? angle + 180 : angle;
-    label.style.transform = `translate(-50%, -50%) rotate(${readableAngle}deg)`;
+    let spokeAngle = angle + 90;
+    const normalizedSpoke = ((spokeAngle % 360) + 360) % 360;
+    if (normalizedSpoke > 90 && normalizedSpoke < 270) spokeAngle += 180;
+    label.style.transform = `translate(-50%, -50%) rotate(${spokeAngle}deg)`;
     wheel.appendChild(label);
   });
 }
@@ -125,6 +129,64 @@ function spin() {
     if (spinCount < 3) spinButton.disabled = false;
   }, 3700);
 }
+
+function pointerAngle(event) {
+  const rect = wheel.getBoundingClientRect();
+  return Math.atan2(event.clientY - (rect.top + rect.height / 2), event.clientX - (rect.left + rect.width / 2)) * 180 / Math.PI;
+}
+
+wheelStage.addEventListener("pointerdown", event => {
+  if (spinning || spinCount >= 3 || event.button !== 0) return;
+  drag = {
+    id: event.pointerId,
+    angle: pointerAngle(event),
+    startRotation: rotation,
+    lastX: event.clientX,
+    lastY: event.clientY,
+    distance: 0,
+    angleTravel: 0
+  };
+  wheelStage.setPointerCapture(event.pointerId);
+  wheelStage.classList.add("dragging");
+  wheel.style.transition = "none";
+  spinButton.disabled = true;
+});
+
+wheelStage.addEventListener("pointermove", event => {
+  if (!drag || drag.id !== event.pointerId) return;
+  event.preventDefault();
+  const angle = pointerAngle(event);
+  let delta = angle - drag.angle;
+  if (delta > 180) delta -= 360;
+  if (delta < -180) delta += 360;
+  const dx = event.clientX - drag.lastX;
+  const dy = event.clientY - drag.lastY;
+  drag.distance += Math.hypot(dx, dy);
+  drag.angleTravel += Math.abs(delta);
+  rotation += delta;
+  drag.angle = angle;
+  drag.lastX = event.clientX;
+  drag.lastY = event.clientY;
+  wheel.style.transform = `rotate(${rotation}deg)`;
+});
+
+function finishDrag(event, cancelled = false) {
+  if (!drag || drag.id !== event.pointerId) return;
+  const shouldSpin = !cancelled && drag.distance >= 60 && drag.angleTravel >= 30;
+  wheelStage.classList.remove("dragging");
+  if (wheelStage.hasPointerCapture(event.pointerId)) wheelStage.releasePointerCapture(event.pointerId);
+  if (!shouldSpin) {
+    rotation = drag.startRotation;
+    wheel.style.transition = "transform .25s ease-out";
+    wheel.style.transform = `rotate(${rotation}deg)`;
+    spinButton.disabled = spinCount >= 3;
+  }
+  drag = null;
+  if (shouldSpin) spin();
+}
+
+wheelStage.addEventListener("pointerup", event => finishDrag(event));
+wheelStage.addEventListener("pointercancel", event => finishDrag(event, true));
 
 function showOutcome() {
   const won = selectedFormula.textContent === question.correct;

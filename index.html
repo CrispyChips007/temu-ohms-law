@@ -41,13 +41,15 @@
 
           <div class="attempts" id="attempts" aria-label="Three available spins"></div>
 
-          <div class="wheel-stage">
+          <div class="wheel-stage" id="wheelStage">
             <div class="pointer" aria-hidden="true"><span></span></div>
             <div class="wheel-shadow"></div>
-            <div class="wheel" id="wheel" aria-label="Formula prize wheel"></div>
+            <div class="wheel" id="wheel" aria-label="Formula prize wheel. Swipe around the wheel to spin." aria-describedby="wheelHint"></div>
             <div class="wheel-hub"><span>SPIN</span><small>TO WIN</small></div>
             <span class="spark spark-a">✦</span><span class="spark spark-b">✦</span>
           </div>
+
+          <p class="wheel-gesture-hint" id="wheelHint"><span>↻</span> SWIPE THE WHEEL OR TAP SPIN</p>
 
           <div class="result-chip" id="resultChip" aria-live="polite">
             <span>YOUR FORMULA</span>
