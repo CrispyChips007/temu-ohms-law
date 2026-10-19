@@ -49,9 +49,7 @@ function buildWheel() {
     const radians = angle * Math.PI / 180;
     label.style.left = `${50 + Math.sin(radians) * 34}%`;
     label.style.top = `${50 - Math.cos(radians) * 34}%`;
-    let spokeAngle = angle + 90;
-    const normalizedSpoke = ((spokeAngle % 360) + 360) % 360;
-    if (normalizedSpoke > 90 && normalizedSpoke < 270) spokeAngle += 180;
+    const spokeAngle = angle - 90;
     label.style.transform = `translate(-50%, -50%) rotate(${spokeAngle}deg)`;
     wheel.appendChild(label);
   });
