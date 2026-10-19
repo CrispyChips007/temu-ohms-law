@@ -17,12 +17,12 @@ const questions = [
 
 const prizes = [
   { icon: "📟", title: "You won a multimeter!", old: "$189.99", price: "$0.00", copy: "CAT ratings include Kitten, Tabby and Lion. Probes, display and electrical accuracy sold separately.", delivery: "$450 delivery • arrives sometime before 2029" },
-  { icon: "🪛", title: "12-piece insulated screwdriver set!", old: "$149.00", price: "$0.07", copy: "Laboratory tested and certified safe for voltages up to an impressive 0 V.", delivery: "Only 3,904 sets left — almost gone!" },
+  { icon: "", art: "screwdriver", title: "12-piece insulated screwdriver set!", old: "$149.00", price: "$0.07", copy: "Laboratory tested and certified safe for voltages up to an impressive 0 V.", delivery: "Only 3,904 sets left — almost gone!" },
   { icon: "🥫", title: "Premium can of smoke!", old: "$79.95", price: "$0.01", copy: "Factory-original replacement smoke for electronics. Simply pour it back in after a component blows.", delivery: "Smoke may escape package during transit" },
   { icon: "🪣", title: "Trade-size bucket of volts!", old: "$119.95", price: "$0.00", copy: "Contains 240 genuine Australian volts. Keep upright to prevent dangerous voltage drop.", delivery: "Free pickup from an undisclosed substation" },
   { icon: "↔️", title: "Heavy-duty wire stretcher!", old: "$229.00", price: "$1.08", copy: "Adds up to 3 metres whenever the apprentice cuts the cable 50 mm too short.", delivery: "Your local courier has pulled it too tight" },
   { icon: "💪", title: "Industrial elbow grease!", old: "$399.00", price: "$0.53", copy: "One 10 mL tin. Specially formulated for stiff conduit and first-year apprentices.", delivery: "Danger: may cause sudden productivity" },
-  { icon: "🪛", title: "Left-handed screwdriver!", old: "$160.00", price: "$0.79", copy: "Ergonomically useless for lefties, righties and anyone attempting to turn a screw.", delivery: "Also available in metric Phillips" },
+  { icon: "", art: "screwdriver", title: "Left-handed insulated screwdriver!", old: "$160.00", price: "$0.79", copy: "Ergonomically useless for lefties, righties and anyone attempting to turn a screw.", delivery: "Also available in metric Phillips" },
   { icon: "〰️", title: "Cordless electrical cable!", old: "$999.00", price: "$2.49", copy: "100% wireless wire. Zero copper, zero insulation, zero awkward reels to carry.", delivery: "Already delivered — you just can't see it" },
   { icon: "✨", title: "Bucket of grinder sparks!", old: "$84.00", price: "$0.04", copy: "Pre-owned sparks, hand collected on site. Recharge in direct fluorescent light.", delivery: "Flammable delivery surcharge: $612" }
 ];
@@ -203,15 +203,21 @@ function showOutcome() {
   const won = selectedFormula.textContent === question.correct;
   const prize = prizes[Math.floor(Math.random() * prizes.length)];
   const prizeCard = document.querySelector(".prize-card");
+  const prizeVisual = document.querySelector("#prizeVisual");
   prizeCard.classList.toggle("failure", !won);
-  document.querySelector("#outcomeKicker").textContent = won ? "VEMU DODGY DEAL UNLOCKED" : "FORMULA REJECTED";
+  prizeVisual.classList.toggle("insulated-screwdriver", won && prize.art === "screwdriver");
+  if (won && prize.art === "screwdriver") {
+    prizeVisual.innerHTML = '<span class="insulated-driver"><i class="driver-shaft"></i><i class="driver-handle"></i></span>';
+  } else {
+    prizeVisual.textContent = won ? prize.icon : "⛔";
+  }
+  document.querySelector("#outcomeKicker").textContent = won ? "VEMU EXCLUSIVE DEAL" : "FORMULA REJECTED";
   document.querySelector("#outcomeTitle").textContent = won ? prize.title : "Wrong answer. No bargain for you.";
-  document.querySelector("#prizeVisual").textContent = won ? prize.icon : "⛔";
   document.querySelector("#oldPrice").textContent = won ? prize.old : "";
   document.querySelector("#newPrice").textContent = won ? prize.price : "NO DEAL";
   document.querySelector("#prizeCopy").textContent = won ? prize.copy : `You kept ${selectedFormula.textContent}. The circuit needed ${question.correct}. Your suspiciously cheap prize has been repossessed.`;
   document.querySelector("#deliveryText").textContent = won ? prize.delivery : "Correct formula required — no substitutions";
-  document.querySelector("#playAgainButton").textContent = won ? "CLAIM DODGY DEAL & PLAY AGAIN" : "TRY ANOTHER FORMULA";
+  document.querySelector("#playAgainButton").textContent = won ? "CLAIM DEAL & PLAY AGAIN" : "TRY ANOTHER FORMULA";
   document.querySelector("#outcomeModal").classList.remove("hidden");
   if (won) makeConfetti();
   beep(won ? 880 : 160, .35);

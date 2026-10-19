@@ -16,3 +16,7 @@ Open `index.html`, or serve the folder with any static file server.
 All voltage formulas use **V**, not E.
 
 This project is an unaffiliated educational parody. No actual products, discounts, prizes, or alarming delivery fees are offered.
+
+## Publishing updates
+
+The HTML shell requests no-cache behaviour and loads `styles.css` and `app.js` with a release query string. When publishing a future update, bump the matching `?v=` value on both asset URLs in `index.html` so browsers immediately request the new files.

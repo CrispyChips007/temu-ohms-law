@@ -73,9 +73,9 @@ h1 em { color: var(--orange); font-style: normal; }
 .wheel-hub { z-index: 4; position: absolute; width: 28%; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 5px solid #fff; border-radius: 50%; color: #fff; background: linear-gradient(#ff6a18,#e93600); box-shadow: 0 4px 10px rgba(75,21,0,.38); font-weight: 900; line-height: .9; }
 .wheel-hub span { font-size: clamp(16px, 5vw, 23px); }
 .wheel-hub small { font-size: 7px; letter-spacing: 1px; }
-.pointer { z-index: 7; position: absolute; top: -5px; left: 50%; width: 26px; height: 38px; transform: translateX(-50%); filter: drop-shadow(0 3px 3px rgba(74,20,0,.5)); }
-.pointer span { position: absolute; top: 0; left: 3px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 30px solid #fff; }
-.pointer span::after { content: ""; position: absolute; top: -29px; left: -7px; width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 23px solid #f02e00; }
+.pointer { z-index: 7; position: absolute; top: 2px; left: 50%; width: 24px; height: 34px; transform: translateX(-50%); filter: drop-shadow(0 3px 3px rgba(74,20,0,.5)); }
+.pointer span { position: absolute; top: 0; left: 3px; width: 0; height: 0; border-left: 9px solid transparent; border-right: 9px solid transparent; border-top: 26px solid #fff; }
+.pointer span::after { content: ""; position: absolute; top: -25px; left: -6px; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 20px solid #f02e00; }
 .spark { position: absolute; color: var(--yellow); font-size: 25px; animation: twinkle 1.2s alternate infinite; }
 .spark-a { left: -4px; top: 22%; }.spark-b { right: -5px; bottom: 16%; animation-delay: .5s; }
 .wheel-gesture-hint { margin: -2px 0 7px; color: #a44a25; font-size: 9px; font-weight: 900; letter-spacing: .55px; }
@@ -116,6 +116,12 @@ footer { padding: 15px 26px 22px; color: #9b8477; background: #fff; font-size: 8
 .modal h2 { position: relative; margin: 12px 0 8px; font-family: "Space Grotesk", sans-serif; font-size: 29px; line-height: 1; letter-spacing: -1.5px; }
 .info-card { text-align: left; }.info-card .modal-kicker, .info-card h2 { margin-left: 12px; }.info-card ol { position: relative; padding-left: 35px; line-height: 1.5; }.info-card p { position: relative; padding: 8px 12px; background: #fff; border-radius: 10px; font-size: 12px; }.compact { position: relative; }
 .prize-visual { position: relative; width: 125px; aspect-ratio: 1; margin: 14px auto 4px; display: grid; place-items: center; border: 3px solid #ffd3bb; border-radius: 22px; background: linear-gradient(145deg,#fff,#ffe5d3); font-size: 70px; transform: rotate(-3deg); }
+.prize-visual.insulated-screwdriver { overflow: hidden; background: radial-gradient(circle at 65% 22%, #fff 0 6px, transparent 7px), linear-gradient(145deg,#fff,#ffe5d3); }
+.insulated-driver { position: relative; display: block; width: 42px; height: 112px; transform: rotate(38deg); filter: drop-shadow(4px 5px 3px rgba(95,28,0,.22)); }
+.driver-shaft { position: absolute; top: 0; left: 17px; width: 8px; height: 66px; border: 2px solid #8c969e; border-radius: 3px 3px 0 0; background: linear-gradient(90deg,#aeb8bf,#f5f7f8 45%,#909ba3); }
+.driver-shaft::before { content: ""; position: absolute; top: -5px; left: -2px; width: 8px; height: 6px; border-radius: 1px; background: #69747b; }
+.driver-handle { position: absolute; top: 57px; left: 5px; width: 32px; height: 54px; border: 3px solid #a7180b; border-radius: 10px 10px 17px 17px; background: #f12d17; box-shadow: inset 0 0 0 5px #ffd426, inset 0 0 0 9px #ed2e19; }
+.driver-handle::before { content: "0 V"; position: absolute; top: 17px; left: 5px; color: #fff8c5; font: 900 8px/1 "DM Sans", sans-serif; letter-spacing: -.3px; transform: rotate(-90deg); }
 .price-line { position: relative; margin: 5px 0; }.price-line del { color: #9e887a; font-size: 13px; }.price-line strong { margin-left: 6px; color: var(--orange); font-size: 32px; }
 .prize-copy { position: relative; min-height: 55px; margin: 8px 5px; font-size: 13px; line-height: 1.35; }
 .delivery-line { position: relative; display: flex; align-items: center; gap: 8px; margin: 12px 0; padding: 9px 11px; border-radius: 10px; color: #76523e; background: #ffeadb; font-size: 10px; text-align: left; }
