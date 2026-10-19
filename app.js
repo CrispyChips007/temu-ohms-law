@@ -24,7 +24,7 @@ const prizes = [
   { icon: "💪", title: "Industrial elbow grease!", old: "$399.00", price: "$0.53", copy: "One 10 mL tin. Specially formulated for stiff conduit and first-year apprentices.", delivery: "Danger: may cause sudden productivity" },
   { image: "vemu-insulated-screwdriver-set.png?v=20261019.2", title: "Left-handed insulated screwdriver set!", old: "$160.00", price: "$0.79", copy: "Ergonomically useless for lefties, righties and anyone attempting to turn a screw.", delivery: "Also available in metric Phillips" },
   { icon: "〰️", title: "Cordless electrical cable!", old: "$999.00", price: "$2.49", copy: "100% wireless wire. Zero copper, zero insulation, zero awkward reels to carry.", delivery: "Already delivered — you just can't see it" },
-  { icon: "✨", title: "Bucket of grinder sparks!", old: "$84.00", price: "$0.04", copy: "Pre-owned sparks, hand collected on site. Recharge in direct fluorescent light.", delivery: "Flammable delivery surcharge: $612" }
+  { icon: "✨", title: "Bucket of grinder sparks!", old: "$84.00", price: "$0.04", copy: "Pre-owned sparks, hand collected on site. Bucket lid sold separately.", delivery: "Flammable delivery surcharge: $612" }
 ];
 
 const wheel = document.querySelector("#wheel");
